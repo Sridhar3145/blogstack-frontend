@@ -29,7 +29,7 @@ const BlogExtendView = () => {
  }, [slug]);
 
 
- if (!blog) return <p>Loading...</p>;
+ if (!blog) return <p className=" text-blue-400 text-3xl text-center mt-40">Loading...</p>;
 
  return (
   <div className="max-w-4xl mx-auto mt-10 px-4">

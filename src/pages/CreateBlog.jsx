@@ -110,7 +110,7 @@ const CreateBlog = () => {
             <div className='flex flex-col space-y-2 w-full px-4'>
 
               <label>Blog Title</label>
-              <input type="text" name='title' placeholder='title' className='w-full border focus:ring-1 focus:outline-none px-4 py-2 rounded-lg' onChange={handleChange} />
+              <input type="text" value={blogInput.title} name='title' placeholder='title' className='w-full border focus:ring-1 focus:outline-none px-4 py-2 rounded-lg' onChange={handleChange} />
             </div>
             <div className='flex flex-col space-y-2 w-full px-4'>
               <label>Category</label>
@@ -138,7 +138,7 @@ const CreateBlog = () => {
             <div className='flex flex-col space-y-2 w-full px-4'>
 
               <label>CoverImage</label>
-              <input type="text" name="coverImage" placeholder='Image Link' className='w-full border focus:ring-1 focus:outline-none px-4 py-2 rounded-lg' onChange={handleChange} />
+              <input type="text" name="coverImage" value={blogInput.coverImage} placeholder='Image Link' className='w-full border focus:ring-1 focus:outline-none px-4 py-2 rounded-lg' onChange={handleChange} />
             </div>
             <div className='flex flex-col space-y-2 w-full px-4'>
               <label>Tags</label>
@@ -173,7 +173,7 @@ const CreateBlog = () => {
           <div className='flex flex-col space-y-2 w-full px-4'>
 
             <label>Content</label>
-            <textarea rows={5} name='content' onChange={handleChange} placeholder='Enter Blog Content' className='w-full min-h-37.5 border focus:ring-1 focus:outline-none px-4 py-2 rounded-lg' />
+            <textarea rows={5} name='content' value={blogInput.content} onChange={handleChange} placeholder='Enter Blog Content' className='w-full min-h-37.5 border focus:ring-1 focus:outline-none px-4 py-2 rounded-lg' />
           </div>
           {error && <p className='text-red-400 font-medium'>{error}</p>}
           {success && <p className='text-green-200 font-medium'>{success}</p>}

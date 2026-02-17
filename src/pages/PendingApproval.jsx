@@ -92,25 +92,25 @@ const PendingApproval = () => {
   }
  };
 
- if (loading) return <p className="text-center mt-10">Loading...</p>;
- if (error) return <p className="text-red-500 text-center">{error}</p>;
+ if (loading) return <p className="text-blue-400 text-3xl text-center mt-40">Loading...</p>;
+ if (error) return <p className="text-red-500 text-center mt-40 text-2xl">{error}</p>;
 
  return (
   <div className="max-w-6xl mx-auto mt-10 px-4">
-   <h1 className="text-2xl font-bold mb-6">
+   <h1 className="text-2xl mb-6 text-blue-400 font-medium">
     Pending Blog Approvals
    </h1>
 
    {blogs.length === 0 ? (
-    <p>No pending blogs.</p>
+    <p className="text-blue-400">No pending blogs.</p>
    ) : (
     blogs.map((blog) => (
      <div
       key={blog._id}
       onClick={() => setSelectedBlog(blog)}
-      className="border rounded-lg p-5 mb-5 shadow cursor-pointer hover:shadow-lg transition"
+      className="  cursor-pointer  transition bg-white p-6 rounded-xl shadow-2xl mb-6 w-full py-10 hover:scale-105"
      >
-      <h2 className="text-xl font-bold">
+      <h2 className="text-xl font-bold hover:text-blue-400">
        {blog.title}
       </h2>
 

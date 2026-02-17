@@ -17,6 +17,8 @@ const MyBlogs = () => {
         });
 
         const data = await res.json();
+        console.log(data);
+
 
         if (!res.ok) {
           throw new Error(data.msg || "Failed to fetch blogs");
@@ -51,7 +53,7 @@ const MyBlogs = () => {
         blogs.map((blog) => (
           <div
             key={blog._id}
-            className="bg-white shadow-lg rounded-xl p-6 mb-6 border"
+            className="bg-white shadow-2xl rounded-xl p-6 mb-6 "
           >
 
             <h2 className="text-xl font-bold mb-2">
@@ -81,6 +83,7 @@ const MyBlogs = () => {
                   Rejected
                 </span>
               )}
+
             </div>
 
             {blog.coverImage && (
