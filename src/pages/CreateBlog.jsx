@@ -175,8 +175,8 @@ const CreateBlog = () => {
             <label>Content</label>
             <textarea rows={5} name='content' onChange={handleChange} placeholder='Enter Blog Content' className='w-full min-h-37.5 border focus:ring-1 focus:outline-none px-4 py-2 rounded-lg' />
           </div>
-          {error && <p className='text-red-500 font-medium'>{error}</p>}
-          {success && <p className='text-green-400 font-medium'>{success}</p>}
+          {error && <p className='text-red-400 font-medium'>{error}</p>}
+          {success && <p className='text-green-200 font-medium'>{success}</p>}
           <div className='w-full px-4'>
             <button type='submit' className='border  border-white py-3 w-full  rounded-lg hover:bg-gray-200 bg-white text-blue-600 transition-all font-medium'>Get Approval</button>
           </div>
