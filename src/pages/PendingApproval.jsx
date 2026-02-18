@@ -37,6 +37,11 @@ const PendingApproval = () => {
  }, []);
 
  const handleApprove = async (id) => {
+  if (!token) {
+   alert("Unauthorized");
+   return;
+  }
+
   try {
    const res = await fetch(
     `${import.meta.env.VITE_API_URL}/blog/approve/${id}`,
@@ -52,8 +57,10 @@ const PendingApproval = () => {
     throw new Error("Approval failed");
    }
 
-   setBlogs(blogs.filter((blog) => blog._id !== id));
+   setBlogs((prev) => prev.filter((blog) => blog._id !== id));
    setSelectedBlog(null);
+   setShowRejectBox(false);
+   setRejectReason("");
   } catch (err) {
    alert(err.message);
   }
@@ -62,6 +69,11 @@ const PendingApproval = () => {
  const handleReject = async (id) => {
   if (!rejectReason.trim()) {
    alert("Please enter rejection reason");
+   return;
+  }
+
+  if (!token) {
+   alert("Unauthorized");
    return;
   }
 
@@ -74,7 +86,7 @@ const PendingApproval = () => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
      },
-     body: JSON.stringify({ reason: rejectReason }),
+     body: JSON.stringify({ reason: rejectReason.trim() }),
     }
    );
 
@@ -82,11 +94,10 @@ const PendingApproval = () => {
     throw new Error("Reject failed");
    }
 
-   setBlogs(blogs.filter((blog) => blog._id !== id));
+   setBlogs((prev) => prev.filter((blog) => blog._id !== id));
    setSelectedBlog(null);
    setRejectReason("");
    setShowRejectBox(false);
-
   } catch (err) {
    alert(err.message);
   }
@@ -108,7 +119,7 @@ const PendingApproval = () => {
      <div
       key={blog._id}
       onClick={() => setSelectedBlog(blog)}
-      className="  cursor-pointer  transition bg-white p-6 rounded-xl shadow-2xl mb-6 w-full py-10 hover:scale-105"
+      className="cursor-pointer transition bg-white p-6 rounded-xl shadow-2xl mb-6 w-full py-10 hover:scale-105"
      >
       <h2 className="text-xl font-bold hover:text-blue-400">
        {blog.title}
@@ -128,14 +139,22 @@ const PendingApproval = () => {
    {selectedBlog && (
     <div
      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
-     onClick={() => setSelectedBlog(null)}
+     onClick={() => {
+      setSelectedBlog(null);
+      setShowRejectBox(false);
+      setRejectReason("");
+     }}
     >
      <div
       onClick={(e) => e.stopPropagation()}
       className="bg-white w-[90%] max-w-3xl max-h-[90vh] overflow-y-auto rounded-xl p-6 relative"
      >
       <button
-       onClick={() => setSelectedBlog(null)}
+       onClick={() => {
+        setSelectedBlog(null);
+        setShowRejectBox(false);
+        setRejectReason("");
+       }}
        className="absolute top-3 right-4 text-xl font-bold"
       >
        ✕
@@ -178,6 +197,7 @@ const PendingApproval = () => {
       {showRejectBox && (
        <div className="mt-4">
         <textarea
+         rows={4}
          placeholder="Enter rejection reason..."
          value={rejectReason}
          onChange={(e) => setRejectReason(e.target.value)}
@@ -192,7 +212,6 @@ const PendingApproval = () => {
         </button>
        </div>
       )}
-
      </div>
     </div>
    )}
@@ -201,3 +220,4 @@ const PendingApproval = () => {
 };
 
 export default PendingApproval;
+
