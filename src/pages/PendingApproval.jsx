@@ -61,6 +61,7 @@ const PendingApproval = () => {
    setSelectedBlog(null);
    setShowRejectBox(false);
    setRejectReason("");
+   window.dispatchEvent(new Event("pendingUpdated"));
   } catch (err) {
    alert(err.message);
   }
@@ -98,6 +99,7 @@ const PendingApproval = () => {
    setSelectedBlog(null);
    setRejectReason("");
    setShowRejectBox(false);
+   window.dispatchEvent(new Event("pendingUpdated"));
   } catch (err) {
    alert(err.message);
   }

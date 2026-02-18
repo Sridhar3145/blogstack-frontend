@@ -52,6 +52,12 @@ const Navbar = () => {
   }
 
   fetchPendingBlogs()
+
+  window.addEventListener("pendingUpdated", fetchPendingBlogs);
+
+  return () => {
+   window.removeEventListener("pendingUpdated", fetchPendingBlogs);
+  };
  }, [isAdmin, location.pathname])
 
  const handleLogout = () => {
